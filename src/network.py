@@ -52,7 +52,8 @@ class Network(object):
             else:
                 print("Epoch {0} in {1} seconds".format(j, "%0.2f" % (time() - start)))
 
-        print("Total Time: {0}".format("%0.2f" % (time() - original)))
+        sec = time() - original
+        print("Total Time: {0} min {1} sec".format(int(sec // 60), "%0.2f" % (sec % 60)))
 
     def update_mini_batch(self, mini_batch, eta):
         """ Update the network's weights and biases by applying gradient descent using
@@ -90,7 +91,7 @@ class Network(object):
         delta = self.cost_derivative(activations[-1], train_out) * sigmoid_prime(zs[-1])
         grad_b[-1] = delta
         grad_w[-1] = np.dot(delta, activations[-2].transpose())
-        # l = 1 means the last layer of neurons, l = 2 is the second-last layer, and so on.
+        # l = 1 means the last layer of neurons, l = 2 is the second-last layer, etc
         for l in range(2, self.num_layers):
             z = zs[-l]
             sp = sigmoid_prime(z)
@@ -119,4 +120,5 @@ class Network(object):
 
 def sigmoid_prime(z):
     """ Derivative of the sigmoid function. """
-    return sigmoid(z) * (1.0 - sigmoid(z))
+    sigmoid_z = sigmoid(z)
+    return sigmoid_z * (1.0 - sigmoid_z)
