@@ -10,4 +10,6 @@ But the original book was in Python 2 and is showing its age a bit. I was totall
 
 ## Chapter 1 - Neural Network Introduction with MNIST
 
-Loading the MNIST data was a complete distaster, so now the MNIST data is taken directly from TensorFlow. This is a lot more reliable (Google backing) and I am including the data just to be sure.
+Loading the MNIST data was a complete distaster. There were 32-bit vs 64-bit problems, problems with the version of Python and various `pickle` vs `cPickle` versions.
+
+The new version of the chapter 1 scripts pull the MNIST data directly from TensorFlow. This is a lot more reliable (Google backing) and I am including the data just to be sure there are no issues.
