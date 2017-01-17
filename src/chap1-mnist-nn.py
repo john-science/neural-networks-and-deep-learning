@@ -12,12 +12,12 @@ import network
 
 
 def main():
-	''' These settings achieved 94.75% accuracy on my particular setup.
-	'''
-	training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
-	net = network.Network([784, 30, 10])
-	net.SGD(training_data, 30, 15, 3, test_data=test_data)
+    ''' These settings achieved 94.75% accuracy on my particular setup.
+    '''
+    training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
+    net = network.Network([784, 30, 10])
+    net.SGD(training_data, 30, 15, 3, test_data=test_data)
 
 
 if __name__ == '__main__':
-	main()
+    main()
