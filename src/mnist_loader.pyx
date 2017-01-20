@@ -1,7 +1,4 @@
-# %load mnist_loader.py
 """
-mnist_loader
-~~~~~~~~~~~~
 A library to load the MNIST image data.  For details of the data
 structures that are returned, see the doc strings for ``load_data``
 and ``load_data_wrapper``.  In practice, ``load_data_wrapper`` is the
@@ -14,7 +11,7 @@ import numpy as np
 from tensorflow.examples.tutorials.mnist import input_data
 
 
-def load_data():
+cdef tuple load_data():
     """Return the MNIST data as a tuple containing the training data,
     the validation data, and the test data.
     The ``training_data`` is returned as a tuple with two entries.
@@ -33,6 +30,7 @@ def load_data():
     That's done in the wrapper function ``load_data_wrapper()``, see
     below.
     """
+    cdef tuple training_data, validation_data, test_data
     mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
     
     training_data = (mnist.train.images, mnist.train.labels)
@@ -42,7 +40,7 @@ def load_data():
     return (training_data, validation_data, test_data)
 
 
-def load_data_wrapper():
+cpdef tuple load_data_wrapper():
     """Return a tuple containing ``(training_data, validation_data,
     test_data)``. Based on ``load_data``, but the format is more
     convenient for use in our implementation of neural networks.
@@ -60,10 +58,11 @@ def load_data_wrapper():
     the training data and the validation / test data.  These formats
     turn out to be the most convenient for use in our neural network
     code."""
+    cdef tuple tr_d, va_d, te_d
+    cdef list training_inputs, training_results, training_data
+    cdef list validation_inputs, validation_data, test_inputs, test_data
     tr_d, va_d, te_d = load_data()
     training_inputs = [np.reshape(x, (784, 1)) for x in tr_d[0]]
-    #print(tr_d[1][0].shape)
-    #print(np.zeros((10, 1)).shape)
     training_results = [y.reshape((10, 1)) for y in tr_d[1]]
     training_data = list(zip(training_inputs, training_results))
     validation_inputs = [np.reshape(x, (784, 1)) for x in va_d[0]]
@@ -72,13 +71,3 @@ def load_data_wrapper():
     test_data = list(zip(test_inputs, te_d[1]))
 
     return (training_data, validation_data, test_data)
-
-
-def vectorized_result(j):
-    """Return a 10-dimensional unit vector with a 1.0 in the jth
-    position and zeroes elsewhere.  This is used to convert a digit
-    (0...9) into a corresponding desired output from the neural
-    network."""
-    e = np.zeros((10, 1))
-    e[j] = 1.0
-    return e
