@@ -13,3 +13,5 @@ But the original book was in Python 2 and is showing its age a bit. I was totall
 Loading the MNIST data was a complete distaster. There were 32-bit vs 64-bit problems, problems with the version of Python and various `pickle` vs `cPickle` versions.
 
 The new version of the chapter 1 scripts pull the MNIST data directly from TensorFlow. This is a lot more reliable (Google backing) and I am including the data just to be sure there are no issues.
+
+I also converted the project to Cython, to improve performance. I only did a cursory compile-change though. I did not go through the code line-by-line and re-write it.
