@@ -8,15 +8,15 @@ http://neuralnetworksanddeeplearning.com/chap1.html
 '''
 
 import mnist_loader
-import network
+import network2
 
 
 def main():
     ''' These settings achieved 95% accuracy on my particular hardware setup.
     '''
     training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
-    net = network.Network([784, 30, 10])
-    net.SGD(training_data, 30, 15, 3, test_data=test_data)
+    net = network2.Network([784, 30, 10])
+    net.SGD(training_data, 30, 15, 3)  #, test_data=test_data)
     ''' And these settings achieved 97% accuracy, but took about
         4 times longer to run.
 
