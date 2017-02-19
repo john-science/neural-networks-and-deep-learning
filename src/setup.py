@@ -14,5 +14,5 @@ from Cython.Build import cythonize
 
 
 setup(
-    ext_modules = cythonize(["mnist_loader.pyx", "network.pyx", "network2.pyx"])
+    ext_modules = cythonize(["mnist_loader.pyx", "network.pyx", "network2.pyx", "network3.pyx"])
 )
